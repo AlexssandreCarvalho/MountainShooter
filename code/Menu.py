@@ -11,12 +11,12 @@ from code.Const import WIN_WIDTH, COLOR_BROWN, COLOR_WHITE, MENU_OPTION, COLOR_Y
 class Menu:
     def __init__(self, window):
         self.window = window
-        self.surf = pygame.image.load('./asset/MenuBg.png')
+        self.surf = pygame.image.load('./asset/MenuBg.png').convert_alpha()
         self.rect = self.surf.get_rect(left=0, top=0)
 
     def run(self, ):
         menu_option = 0
-        pygame.mixer_music.load('./asset/Menu.mp3')
+        pygame.mixer_music.load(f'./asset/Menu.mp3')
         pygame.mixer_music.play(-1)
 
         while True:
