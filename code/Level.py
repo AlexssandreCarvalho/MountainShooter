@@ -7,7 +7,8 @@ import pygame.display
 from pygame import Surface, Rect
 from pygame.font import Font
 
-from code.Const import COLOR_WHITE, WIN_HEIGHT, MENU_OPTION, EVENT_ENEMY, SPAWN_TIME, FPS_ADJUST
+from code.Const import COLOR_WHITE, WIN_HEIGHT, MENU_OPTION, EVENT_ENEMY, SPAWN_TIME, FPS_ADJUST, COLOR_GREEN, \
+    COLOR_CYAN
 from code.Enemy import Enemy
 from code.Entity import Entity
 from code.EntityFactory import EntityFactory
@@ -29,11 +30,11 @@ class Level:
         pygame.time.set_timer(EVENT_ENEMY, SPAWN_TIME)
 
     def run(self):
-        # Passando o nome completo do arquivo original - utilizei o "Level2.mp3" como exemplo
+        # Passing the full name of the original file - I used "Level2.mp3" as an example
         # pygame.mixer_music.load('./asset/Level2.mp3')
 
-        # Tive que renomear o arquivo de audio "Level1" para "Level 1" para funcionar
-        # não estava reconhecendo o arquivo por conta da formatação do nome
+        # I had to rename the audio file "Level1" to "Level 1" for it to work
+        # I wasn't recognizing the file because of the name formatting
         pygame.mixer_music.load(f'./asset/{self.name}.mp3')
         pygame.mixer_music.play(-1)
         clock = pygame.time.Clock()
@@ -49,6 +50,12 @@ class Level:
                     if shoot is not None:
                         self.entity_list.append(shoot)
 
+                if ent.name == 'Player1':
+                    self.level_text(16, f'Player 1 - Health: {ent.health} | Score: {ent.score}', COLOR_GREEN, (10, 20))
+
+                if ent.name == 'Player2':
+                    self.level_text(16, f'Player 2 - Health: {ent.health} | Score: {ent.score}', COLOR_CYAN, (10, 30))
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -60,8 +67,8 @@ class Level:
 
             # printed text
             self.level_text(16, f'{self.name} - Timeout: {self.timeout / 1000:.1f}s', COLOR_WHITE, (10, 5))
-            self.level_text(16, f'fps: {clock.get_fps():.0f}', COLOR_WHITE, (10, WIN_HEIGHT - 35))
-            self.level_text(16, f'entidades: {len(self.entity_list)}', COLOR_WHITE, (10, WIN_HEIGHT - 20))
+            self.level_text(16, f'Fps: {clock.get_fps():.0f}', COLOR_WHITE, (10, WIN_HEIGHT - 35))
+            self.level_text(16, f'Entidades: {len(self.entity_list)}', COLOR_WHITE, (10, WIN_HEIGHT - 20))
             pygame.display.flip()
 
             # Collisions
