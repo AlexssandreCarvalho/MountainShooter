@@ -39,9 +39,11 @@ class Level:
 
     def run(self, player_score: list[int]):
         pygame.mixer_music.load(f'./asset/{self.name}.mp3')
+        pygame.mixer_music.set_volume(0.3)  # Adjustment in reducing the volume gain of the levels
         pygame.mixer_music.play(-1)
         clock = pygame.time.Clock()
         while True:
+
             # Adjust FPS in game
             clock.tick(FPS_ADJUST)
             for ent in self.entity_list:
@@ -92,7 +94,7 @@ class Level:
             # printed text
             self.level_text(16, f'{self.name} - Timeout: {self.timeout / 1000:.1f}s', COLOR_WHITE, (10, 5))
             self.level_text(16, f'Fps: {clock.get_fps():.0f}', COLOR_WHITE, (10, WIN_HEIGHT - 35))
-            self.level_text(16, f'Entidades: {len(self.entity_list)}', COLOR_WHITE, (10, WIN_HEIGHT - 20))
+            self.level_text(16, f'Entities: {len(self.entity_list)}', COLOR_WHITE, (10, WIN_HEIGHT - 20))
             pygame.display.flip()
 
             # Collisions

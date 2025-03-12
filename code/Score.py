@@ -28,10 +28,12 @@ class Score:
             self.window.blit(source=self.surf, dest=self.rect)
             self.score_text(48, 'YOU WIN!!', COLOR_YELLOW, SCORE_POSITION['Title'])
 
+            text = 'Enter Player 1 name (4 characters): '
+            score = player_score[0]
+
             # Score Player 1
             if game_mode == MENU_OPTION[0]:
                 score = player_score[0]
-                text = 'Enter Player 1 name (4 characters): '
 
             # Score Player Cooperative
             if game_mode == MENU_OPTION[1]:

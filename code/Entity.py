@@ -19,5 +19,5 @@ class Entity(ABC):
         self.last_damage = 'None'  # Variable for the Score
 
     @abstractmethod
-    def move(self, ):
+    def move(self):
         pass
